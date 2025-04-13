@@ -63,6 +63,7 @@ input{
   max-width: 150px;
   min-height: 50px;
   background-color: #eeecec;
+  
 }
 .button:hover {
   color: #5e5d5d;
@@ -73,6 +74,18 @@ input{
   min-height: 50px;
   background-color: #ded5d5;
 }
-.requirement.valid {
+.requirement::before {
+  content: "✗"; 
+  color: red;
+  display: inline-block;
+  width: 1.5em;
+}
+
+.requirement.valid::before {
+  content: "✓"; 
   color: green;
+}
+
+.requirement {
+  color: black; 
 }
