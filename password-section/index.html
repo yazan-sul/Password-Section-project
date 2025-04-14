@@ -25,11 +25,13 @@
     <div class="password-form">
       <label>Current password</label>
       <div style="position: relative; display: inline-block;">
-        <input id="currentPassword" name="currentPassword" type="password" placeholder="Enter your current password" required required >
+        <input id="currentPassword" name="currentPassword" type="password" placeholder="Enter your current password" required >
         <button style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); 
         background: none; border: none; cursor: pointer;" onclick="togglePasswordVisibility('currentPassword')">
           👁️
         </button>
+        <div id="current-error" class="error-message"></div>
+
       </div>
     </div>
     <div class="password-form">
@@ -40,7 +42,10 @@
         background: none; border: none; cursor: pointer;" onclick="togglePasswordVisibility('newPassword')">
           👁️
         </button>
+        <div id="password-error" class="error-message"></div>
+
       </div>
+      
     </div>
     <div class="requirements">
       <div id="length-req" class="requirement invalid">8 - 64 characters</div>
@@ -57,13 +62,24 @@
         background: none; border: none; cursor: pointer;" onclick="togglePasswordVisibility('rePassword')">
           👁️
         </button>
+        <div id="confirm-error" class="error-message"></div>
+
       </div>
     </div>
-    <button class="button" id="saveButton" type="button" onclick="submitPasswordChange()">Save Changes</button>
+    <button class="button" id="saveButton" type="submit" onclick="submitPasswordChange()">Save Changes</button>
 
   </div>
-
-
+<!-- 
+  <form method="POST" action="/users/signup">
+    <label for="email-input">Email</label>
+    <input autocomplete="email" id="email-input" name="userEmail" required type="email">
+    <label for="new-password">Password</label>
+    <input autocomplete="new-password" id="password-input" minlength="8" name="userPassword" required type="password">
+    <div id="password-hint">
+      Your password must be at least 8 characters long.
+    </div>
+    <button>Sign up</button>
+  </form> -->
   <div class="credits" data-gfe-screenshot-exclude="true">
     A challenge by
     <a href="https://www.greatfrontend.com/projects?ref=challenges" target="_blank">GreatFrontEnd Projects</a>. Built by

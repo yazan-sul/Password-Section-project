@@ -1,3 +1,9 @@
+const touchedFields = {
+    currentPassword: false,
+    newPassword: false,
+    rePassword: false
+};
+
 function togglePasswordVisibility(fieldId) {
     const field = document.getElementById(fieldId);
     if (field.type === 'password') {
@@ -6,12 +12,30 @@ function togglePasswordVisibility(fieldId) {
         field.type = 'password'; 
     }
 }
+function handleFieldFocus(fieldId) {
+    touchedFields[fieldId] = true;
+
+    if (fieldId === 'rePassword' && !document.getElementById(fieldId).value) {
+        document.getElementById('confirm-error').style.display = 'none';
+        document.getElementById(fieldId).style.borderColor = '';
+    }
+}
 
 function validatePassword() {
     const password = document.getElementById('newPassword').value;
+    const passwordFiled = document.getElementById('newPassword');
+    const errorElement = document.getElementById('password-error');
 
     const unmetCriteria = [];
 
+    // Only show validation if field has been touched or has content
+    if(!touchedFields.newPassword && !password) {
+        passwordFiled.style.borderColor = '';
+        passwordFiled.style.boxShadow = '';
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+        return{ isValid: false, unmetCriteria: []};
+    }
 
     const lengthVaild = password.length >= 8 && password.length <= 64;
     document.getElementById('length-req').classList.toggle('valid', lengthVaild);
@@ -37,6 +61,16 @@ function validatePassword() {
     if(!specialVaild) unmetCriteria.push("at least one special char");
     
     const isValid = lengthVaild && upperVaild && lowerVaild && numberVaild && specialVaild;
+    // if not vaild and touched it will show error message
+    if(!isValid && (touchedFields.newPassword || password)){
+        passwordFiled.style.borderColor = 'red';
+        errorElement.textContent= 'Password must have: ' + unmetCriteria.join(', ');
+        errorElement.style.display = 'block';
+    } else {
+        passwordFiled.style.borderColor = isValid ? '#4CAF50' : '';
+        errorElement.style.display = 'none';
+    }
+
     return { isValid, unmetCriteria };
 }
 function matchPassword() {
@@ -44,7 +78,12 @@ function matchPassword() {
     const repassword = document.getElementById('rePassword').value;
 
     const confirmField = document.getElementById('rePassword');
-
+   
+    if (!touchedFields.rePassword && !repassword) {
+        confirmField.style.borderColor = '';
+        errorElement.style.display = 'none';
+        return false;
+    }
     if (password === repassword) {
         confirmField.style.borderColor = '#4CAF50'; 
         confirmField.style.boxShadow = '0 0 0 2px rgba(76, 175, 80, 0.2)';
@@ -93,8 +132,7 @@ async function submitPasswordChange(){
             new_password : newPassword
             })
         });
-        const result = response.json();
-
+        const result = await response.json();   
         if(response.ok){
             alert("success");
         }

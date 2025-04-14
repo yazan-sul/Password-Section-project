@@ -40,7 +40,7 @@ input{
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1rem;
-  min-width: 900px;
+  min-width: 100%;
 }
 .credits {
   color: #777;
@@ -89,3 +89,12 @@ input{
 .requirement {
   color: black; 
 }
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+  display: none;
+}
+
+
