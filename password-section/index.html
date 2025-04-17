@@ -23,7 +23,7 @@
   </header>
   <form method="POST" action="https://www.greatfrontend.com/api/projects/challenges/auth/change-password" class="container">
     <div class="password-form">
-      <label>Current password</label>
+      <label for="currentPassword">Current password</label>
       <div style="position: relative; display: inline-block;">
         <input id="currentPassword" name="currentPassword" type="password" placeholder="Enter your current password" required >
         <button style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); 
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="password-form">
-      <label>New password</label>
+      <label for="newPassword">New password</label>
       <div style="position: relative; display: inline-block;">
         <input id="newPassword" name="newPassword" type="password" placeholder="Enter your new password"  required oninput="validatePassword(); matchPassword()">
         <button style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); 
@@ -55,7 +55,7 @@
       <div id="special-req" class="requirement invalid">One special character (e.g., ! @ # $ % ^ & *)</div>
     </div>
     <div class="password-form">
-      <label>Confirm New password</label>
+      <label for="rePassword">Confirm New password</label>
       <div style="position: relative; display: inline-block;">
         <input id="rePassword" name="rePassword" type="password" placeholder="repeat your new password" required oninput="matchPassword()">
         <button style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); 
@@ -69,17 +69,7 @@
     <button class="button" id="saveButton" type="submit" onclick="submitPasswordChange()">Save Changes</button>
 
   </form>
-<!-- 
-  <form method="POST" action="/users/signup">
-    <label for="email-input">Email</label>
-    <input autocomplete="email" id="email-input" name="userEmail" required type="email">
-    <label for="new-password">Password</label>
-    <input autocomplete="new-password" id="password-input" minlength="8" name="userPassword" required type="password">
-    <div id="password-hint">
-      Your password must be at least 8 characters long.
-    </div>
-    <button>Sign up</button>
-  </form> -->
+
   <div class="credits" data-gfe-screenshot-exclude="true">
     A challenge by
     <a href="https://www.greatfrontend.com/projects?ref=challenges" target="_blank">GreatFrontEnd Projects</a>. Built by
