@@ -1,3 +1,5 @@
+
+
 const touchedFields = {
     currentPassword: false,
     newPassword: false,
@@ -94,8 +96,11 @@ function matchPassword() {
     }
     return password === repassword;
 }
+const errorElement = document.getElementById("password-error");
+const currentErrorElement = document.getElementById("current-error"); 
 
-async function submitPasswordChange() {
+async function submitPasswordChange(event) {
+    event.preventDefault();
     const saveButton = document.getElementById("saveButton");
     const currentPassword = document.getElementById("currentPassword").value;
     const newPassword = document.getElementById("newPassword").value;
@@ -139,7 +144,6 @@ async function submitPasswordChange() {
 
     saveButton.disabled = true;
     saveButton.textContent = "Saving...";
-
     try {
         const response = await fetch(
             "https://www.greatfrontend.com/api/projects/challenges/auth/change-password",
@@ -181,3 +185,6 @@ async function submitPasswordChange() {
     }
 
 }
+
+const form = document.getElementById('passwords-form');
+form.addEventListener('submit', submitPasswordChange);
